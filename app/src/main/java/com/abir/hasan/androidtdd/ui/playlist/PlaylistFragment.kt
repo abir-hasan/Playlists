@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abir.hasan.androidtdd.data.Playlist
+import com.abir.hasan.androidtdd.data.remote.PlaylistAPI
 import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import com.abir.hasan.androidtdd.databinding.FragmentPlaylistBinding
 
@@ -24,11 +25,11 @@ class PlaylistFragment : Fragment() {
     private val binding: FragmentPlaylistBinding
         get() = _binding!!
 
-    lateinit var viewModel: PlaylistViewModel
+    private lateinit var viewModel: PlaylistViewModel
 
-    lateinit var viewModelFactory: PlaylistViewModelFactory
+    private lateinit var viewModelFactory: PlaylistViewModelFactory
 
-    private val service = PlaylistService()
+    private val service = PlaylistService(object :PlaylistAPI{})
     private val repository = PlaylistRepository(service)
 
 
