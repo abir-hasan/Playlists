@@ -3,6 +3,7 @@ package com.abir.hasan.androidtdd.ui.playlist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.abir.hasan.androidtdd.R
 import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.databinding.AdapterPlaylistItemBinding
 
@@ -34,7 +35,7 @@ class MyPlaylistRecyclerViewAdapter(
         fun onBind(item: Playlist) {
             binding.tvPlaylistName.text = item.name
             binding.tvPlaylistCategory.text = item.category
-            binding.ivPlaylistImage.setImageResource(item.image)
+            binding.ivPlaylistImage.setImageResource(R.mipmap.ic_playlist)
         }
     }
 

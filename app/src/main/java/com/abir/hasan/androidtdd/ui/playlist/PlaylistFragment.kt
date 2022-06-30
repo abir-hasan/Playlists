@@ -1,6 +1,7 @@
 package com.abir.hasan.androidtdd.ui.playlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.data.remote.PlaylistAPI
 import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import com.abir.hasan.androidtdd.databinding.FragmentPlaylistBinding
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class PlaylistFragment : Fragment() {
 
@@ -29,7 +33,14 @@ class PlaylistFragment : Fragment() {
 
     private lateinit var viewModelFactory: PlaylistViewModelFactory
 
-    private val service = PlaylistService(object :PlaylistAPI{})
+    private val retrofit = Retrofit.Builder()
+        //.baseUrl("http://127.0.0.1:3000/") // Check local IP
+        .baseUrl("http://10.0.2.2:3000/") // Check local IP
+        .client(OkHttpClient())
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+    private val api = retrofit.create(PlaylistAPI::class.java)
+    private val service = PlaylistService(api)
     private val repository = PlaylistRepository(service)
 
 
@@ -53,11 +64,12 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun setupObserver(view: View) {
-        viewModel.playlists.observe(viewLifecycleOwner) { lists ->
+        Log.d("TEST", "setupObserver() called")
+        viewModel.playLists.observe(viewLifecycleOwner) { lists ->
             lists.getOrNull()?.let {
                 setupList(view, it)
             } ?: run {
-                // TODO - Error Handling
+                Log.e("TEST", "setupObserver() error")
             }
         }
     }
@@ -67,6 +79,7 @@ class PlaylistFragment : Fragment() {
         lists: List<Playlist>
     ) {
         with(view as RecyclerView) {
+            Log.d("TEST", "setupList() called")
             layoutManager = LinearLayoutManager(requireContext())
             adapter = MyPlaylistRecyclerViewAdapter(lists)
         }

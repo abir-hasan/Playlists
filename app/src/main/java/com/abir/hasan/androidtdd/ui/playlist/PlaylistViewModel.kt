@@ -10,12 +10,16 @@ class PlaylistViewModel(
     private val repository: PlaylistRepository
 ) : ViewModel() {
 
-    private val _playLists = liveData<Result<List<Playlist>>> {
+    /*private val _playLists = liveData<Result<List<Playlist>>> {
         emitSource(repository.getPlaylists().asLiveData())
     }
 
     val playlists: LiveData<Result<List<Playlist>>>
-        get() = _playLists
+        get() = _playLists*/
+
+     val playLists = liveData<Result<List<Playlist>>> {
+        emitSource(repository.getPlaylists().asLiveData())
+    }
 
 
 }
