@@ -5,11 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.abir.hasan.androidtdd.data.Playlist
 
-class PlaylistViewModel : ViewModel() {
+class PlaylistViewModel(
+    private val repository: PlaylistRepository
+) : ViewModel() {
 
     private val _playLists = MutableLiveData<Result<List<Playlist>>>()
 
     val playlists: LiveData<Result<List<Playlist>>>
         get() = _playLists
+
+    init {
+        repository.getPlaylists()
+    }
 
 }
