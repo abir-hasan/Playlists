@@ -1,12 +1,17 @@
 package com.abir.hasan.androidtdd.ui.playlist
 
 import com.abir.hasan.androidtdd.data.Playlist
+import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
-class PlaylistRepository {
+class PlaylistRepository(
+    private val service: PlaylistService
+) {
 
     suspend fun getPlaylists(): Flow<Result<List<Playlist>>> {
-        TODO("Not yet implemented")
+        service.fetchPlaylists()
+        return flow {  }
     }
 
 }

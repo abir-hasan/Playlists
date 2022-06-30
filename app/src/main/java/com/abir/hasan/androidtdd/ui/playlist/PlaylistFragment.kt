@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abir.hasan.androidtdd.data.Playlist
+import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import com.abir.hasan.androidtdd.databinding.FragmentPlaylistBinding
 
 class PlaylistFragment : Fragment() {
@@ -27,7 +28,8 @@ class PlaylistFragment : Fragment() {
 
     lateinit var viewModelFactory: PlaylistViewModelFactory
 
-    private val repository = PlaylistRepository()
+    private val service = PlaylistService()
+    private val repository = PlaylistRepository(service)
 
 
     override fun onCreateView(
