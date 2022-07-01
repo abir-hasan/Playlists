@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import petros.efthymiou.groovy.utils.captureValues
 import petros.efthymiou.groovy.utils.getValueForTest
 
 @ExperimentalCoroutinesApi
@@ -47,13 +48,26 @@ class PlaylistViewModelShould : BaseUnitTest() {
 
     @Test
     fun emitErrorWhenReceivedError() = runTest {
+        val viewModel = mockErrorCase()
+        assertEquals(exception, viewModel.playLists.getValueForTest()!!.exceptionOrNull())
+    }
+
+    private suspend fun mockErrorCase(): PlaylistViewModel {
         whenever(repository.getPlaylists()).thenReturn(
             flow {
                 emit(Result.failure<List<Playlist>>(exception))
             }
         )
-        val viewModel = PlaylistViewModel(repository)
-        assertEquals(exception, viewModel.playLists.getValueForTest()!!.exceptionOrNull())
+        return PlaylistViewModel(repository)
+    }
+
+    @Test
+    fun showSpinnerWhileLoading() = runTest {
+        val viewModel = mockSuccessfulCase()
+        viewModel.loader.captureValues {
+            viewModel.playLists.getValueForTest()
+            assertEquals(true, values[0])
+        }
     }
 
 }

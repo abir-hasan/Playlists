@@ -1,9 +1,6 @@
 package com.abir.hasan.androidtdd.ui.playlist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
 import com.abir.hasan.androidtdd.data.Playlist
 
 class PlaylistViewModel(
@@ -18,8 +15,16 @@ class PlaylistViewModel(
         get() = _playLists*/
 
     val playLists: LiveData<Result<List<Playlist>>> = liveData {
+        _loader.postValue(true)
         emitSource(repository.getPlaylists().asLiveData())
     }
 
+
+    private val _loader: MutableLiveData<Boolean> by lazy {
+        MutableLiveData<Boolean>()
+    }
+
+    val loader: LiveData<Boolean>
+        get() = _loader
 
 }

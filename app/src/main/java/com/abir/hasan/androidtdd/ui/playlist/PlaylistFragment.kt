@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.databinding.FragmentPlaylistBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,18 +54,21 @@ class PlaylistFragment : Fragment() {
         Log.d("TEST", "setupObserver() called")
         viewModel.playLists.observe(viewLifecycleOwner) { lists ->
             lists.getOrNull()?.let {
-                setupList(view, it)
+                setupList(it)
             } ?: run {
                 Log.e("TEST", "setupObserver() error")
             }
         }
+
+        viewModel.loader.observe(viewLifecycleOwner) { loading ->
+            binding.loader.visibility = if (loading) View.VISIBLE else View.GONE
+        }
     }
 
     private fun setupList(
-        view: View,
         lists: List<Playlist>
     ) {
-        with(view as RecyclerView) {
+        with(binding.rvPlaylist) {
             Log.d("TEST", "setupList() called")
             layoutManager = LinearLayoutManager(requireContext())
             adapter = MyPlaylistRecyclerViewAdapter(lists)

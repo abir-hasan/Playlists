@@ -84,4 +84,9 @@ class PlaylistFeature {
             }
         }
     }
+
+    @Test
+    fun displaysLoaderWhileFetchingThePlaylist() {
+        assertDisplayed(R.id.loader)
+    }
 }
