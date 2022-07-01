@@ -35,7 +35,7 @@ class MyPlaylistRecyclerViewAdapter(
         fun onBind(item: Playlist) {
             binding.tvPlaylistName.text = item.name
             binding.tvPlaylistCategory.text = item.category
-            binding.ivPlaylistImage.setImageResource(R.mipmap.ic_playlist)
+            binding.ivPlaylistImage.setImageResource(item.image)
         }
     }
 

@@ -61,7 +61,7 @@ class PlaylistFeature {
         onView(
             allOf(
                 withId(R.id.ivPlaylistImage),
-                isDescendantOfA(nthChildOf(withId(R.id.rvPlaylist), 0))
+                isDescendantOfA(nthChildOf(withId(R.id.rvPlaylist), 1))
             )
         )
             .check(matches(withDrawable(R.mipmap.ic_playlist)))
@@ -95,5 +95,26 @@ class PlaylistFeature {
     fun hidesLoader() {
         Thread.sleep(4005)
         assertNotDisplayed(R.id.loader)
+    }
+
+    @Test
+    fun displaysRockImageForRockListItems() {
+        onView(
+            allOf(
+                withId(R.id.ivPlaylistImage),
+                isDescendantOfA(nthChildOf(withId(R.id.rvPlaylist), 0))
+            )
+        )
+            .check(matches(withDrawable(R.mipmap.ic_rock)))
+            .check(matches(isDisplayed()))
+
+        onView(
+            allOf(
+                withId(R.id.ivPlaylistImage),
+                isDescendantOfA(nthChildOf(withId(R.id.rvPlaylist), 3))
+            )
+        )
+            .check(matches(withDrawable(R.mipmap.ic_rock)))
+            .check(matches(isDisplayed()))
     }
 }

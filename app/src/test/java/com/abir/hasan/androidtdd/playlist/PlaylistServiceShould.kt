@@ -1,6 +1,7 @@
 package com.abir.hasan.androidtdd.playlist
 
 import com.abir.hasan.androidtdd.data.Playlist
+import com.abir.hasan.androidtdd.data.PlaylistRaw
 import com.abir.hasan.androidtdd.data.remote.PlaylistAPI
 import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import com.abir.hasan.androidtdd.utils.BaseUnitTest
@@ -19,7 +20,7 @@ import org.junit.Test
 class PlaylistServiceShould : BaseUnitTest() {
 
     private val playlistAPI: PlaylistAPI = mock()
-    private val playlists = mock<List<Playlist>>()
+    private val playlists = mock<List<PlaylistRaw>>()
     private lateinit var playlistService: PlaylistService
 
     @Test
