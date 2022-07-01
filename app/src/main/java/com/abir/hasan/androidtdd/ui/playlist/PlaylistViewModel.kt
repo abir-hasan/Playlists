@@ -17,7 +17,7 @@ class PlaylistViewModel(
     val playlists: LiveData<Result<List<Playlist>>>
         get() = _playLists*/
 
-     val playLists = liveData<Result<List<Playlist>>> {
+    val playlists: LiveData<Result<List<Playlist>>> = liveData {
         emitSource(repository.getPlaylists().asLiveData())
     }
 
