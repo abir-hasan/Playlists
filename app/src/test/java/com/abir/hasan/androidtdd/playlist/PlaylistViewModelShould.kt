@@ -26,14 +26,14 @@ class PlaylistViewModelShould : BaseUnitTest() {
     @Test
     fun getPlaylistsFroRepository() = runTest {
         val viewModel = mockSuccessfulCase()
-        viewModel.playlists.getValueForTest()
+        viewModel.playLists.getValueForTest()
         verify(repository, times(1)).getPlaylists()
     }
 
     @Test
     fun emitsPlaylistsFromRepository() = runTest {
         val viewModel = mockSuccessfulCase()
-        assertEquals(expected, viewModel.playlists.getValueForTest())
+        assertEquals(expected, viewModel.playLists.getValueForTest())
     }
 
     private suspend fun mockSuccessfulCase(): PlaylistViewModel {
@@ -53,7 +53,7 @@ class PlaylistViewModelShould : BaseUnitTest() {
             }
         )
         val viewModel = PlaylistViewModel(repository)
-        assertEquals(exception, viewModel.playlists.getValueForTest()!!.exceptionOrNull())
+        assertEquals(exception, viewModel.playLists.getValueForTest()!!.exceptionOrNull())
     }
 
 }
