@@ -3,8 +3,9 @@ package com.abir.hasan.androidtdd.ui.playlist
 import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.data.remote.PlaylistService
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class PlaylistRepository(
+class PlaylistRepository @Inject constructor(
     private val service: PlaylistService
 ) {
 
