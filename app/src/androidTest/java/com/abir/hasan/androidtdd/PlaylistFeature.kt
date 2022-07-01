@@ -99,6 +99,7 @@ class PlaylistFeature {
 
     @Test
     fun displaysRockImageForRockListItems() {
+        Thread.sleep(4005)
         onView(
             allOf(
                 withId(R.id.ivPlaylistImage),

@@ -1,5 +1,7 @@
 package com.abir.hasan.androidtdd.data
 
-class PlaylistRaw {
-
-}
+data class PlaylistRaw(
+    val id: String,
+    val name: String,
+    val category: String
+)

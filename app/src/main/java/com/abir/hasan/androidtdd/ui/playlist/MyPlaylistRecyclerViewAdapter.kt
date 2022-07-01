@@ -3,7 +3,6 @@ package com.abir.hasan.androidtdd.ui.playlist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.abir.hasan.androidtdd.R
 import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.databinding.AdapterPlaylistItemBinding
 
