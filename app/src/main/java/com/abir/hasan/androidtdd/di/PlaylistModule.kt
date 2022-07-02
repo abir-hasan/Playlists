@@ -33,10 +33,5 @@ class PlaylistModule {
         return retrofit.create(PlaylistAPI::class.java)
     }
 
-    @Provides
-    fun bla():PlaylistDetailsService{
-        return PlaylistDetailsService()
-    }
-
 
 }
