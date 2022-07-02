@@ -1,12 +1,13 @@
-package com.abir.hasan.androidtdd.ui.playlist.di
+package com.abir.hasan.androidtdd.di
 
 import androidx.test.espresso.IdlingResource
 import com.abir.hasan.androidtdd.data.remote.PlaylistAPI
+import com.abir.hasan.androidtdd.data.remote.PlaylistDetailsService
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +16,7 @@ val client = OkHttpClient()
 val idlingResource: IdlingResource = OkHttp3IdlingResource.create("okhttp", client)
 
 @Module
-@InstallIn(FragmentComponent::class)
+@InstallIn(SingletonComponent::class)
 class PlaylistModule {
 
     @Provides
@@ -30,6 +31,11 @@ class PlaylistModule {
     @Provides
     fun playlistAPI(retrofit: Retrofit): PlaylistAPI {
         return retrofit.create(PlaylistAPI::class.java)
+    }
+
+    @Provides
+    fun bla():PlaylistDetailsService{
+        return PlaylistDetailsService()
     }
 
 

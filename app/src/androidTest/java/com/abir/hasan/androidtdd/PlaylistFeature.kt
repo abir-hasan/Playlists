@@ -5,23 +5,16 @@ import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.abir.hasan.androidtdd.ui.MainActivity
-import com.abir.hasan.androidtdd.ui.playlist.di.idlingResource
+import com.abir.hasan.androidtdd.di.idlingResource
 import com.adevinta.android.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import com.adevinta.android.barista.internal.matcher.DrawableMatcher.Companion.withDrawable
 import org.hamcrest.CoreMatchers.allOf
-import org.junit.Rule
 import org.junit.Test
 
 
 class PlaylistFeature : BaseUITest() {
-
-    // ActivityTestRule is deprecated
-    val mActivityRule = ActivityScenarioRule(MainActivity::class.java)
-        @Rule get
 
     @Test
     fun displayScreenTitle() {
