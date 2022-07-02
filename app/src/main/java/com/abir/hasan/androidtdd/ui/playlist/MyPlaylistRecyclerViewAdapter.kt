@@ -7,7 +7,8 @@ import com.abir.hasan.androidtdd.data.Playlist
 import com.abir.hasan.androidtdd.databinding.AdapterPlaylistItemBinding
 
 class MyPlaylistRecyclerViewAdapter(
-    private val values: List<Playlist>
+    private val values: List<Playlist>,
+    private val listener: (String) -> Unit
 ) : RecyclerView.Adapter<MyPlaylistRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,10 +32,17 @@ class MyPlaylistRecyclerViewAdapter(
     inner class ViewHolder(private val binding: AdapterPlaylistItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        private lateinit var playlist: Playlist
+
+        init {
+            binding.root.setOnClickListener { listener.invoke(playlist.id) }
+        }
+
         fun onBind(item: Playlist) {
-            binding.tvPlaylistName.text = item.name
-            binding.tvPlaylistCategory.text = item.category
-            binding.ivPlaylistImage.setImageResource(item.image)
+            playlist = item
+            binding.tvPlaylistName.text = playlist.name
+            binding.tvPlaylistCategory.text = playlist.category
+            binding.ivPlaylistImage.setImageResource(playlist.image)
         }
     }
 
