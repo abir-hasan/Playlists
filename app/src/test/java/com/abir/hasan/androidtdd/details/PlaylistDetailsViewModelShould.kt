@@ -13,6 +13,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import petros.efthymiou.groovy.utils.captureValues
 import petros.efthymiou.groovy.utils.getValueForTest
 
 @ExperimentalCoroutinesApi
@@ -28,6 +29,7 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
     @Test
     fun getPlaylistDetailsFromService() = runTest {
         mockSuccessfulCase()
+        viewModel.getPlaylistDetails(playlistId)
         //viewModel.playListDetails.getValueForTest()
         verify(service, times(1)).fetchPlaylistDetails(playlistId)
     }
@@ -35,6 +37,7 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
     @Test
     fun emitPlaylistDetailsFromService() = runTest {
         mockSuccessfulCase()
+        viewModel.getPlaylistDetails(playlistId)
         // service.fetchPlaylistDetails(playlistId).first() //Required if viewModelScope switches dispatcher
         assertEquals(expected, viewModel.playListDetails.getValueForTest())
     }
@@ -43,6 +46,25 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
     fun emitErrorWhenServiceFails() = runTest {
         mockErrorCase()
         assertEquals(error, viewModel.playListDetails.getValueForTest())
+    }
+
+    @Test
+    fun showLoaderWhileFetchingDetails() = runTest {
+        mockSuccessfulCase()
+        viewModel.detailsLoader.captureValues {
+            viewModel.getPlaylistDetails(playlistId)
+            assertEquals(true, values[0])
+        }
+    }
+
+    @Test
+    fun hideLoaderAfterPlaylistDetailsHasBeenFetched() = runTest {
+        mockSuccessfulCase()
+        viewModel.detailsLoader.captureValues {
+
+            viewModel.getPlaylistDetails(playlistId)
+            assertEquals(false, values.last())
+        }
     }
 
     private suspend fun mockErrorCase() {
@@ -58,7 +80,6 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
             flow { emit(expected) }
         )
         viewModel = PlaylistDetailsViewModel(service)
-        viewModel.getPlaylistDetails(playlistId)
     }
 
 }

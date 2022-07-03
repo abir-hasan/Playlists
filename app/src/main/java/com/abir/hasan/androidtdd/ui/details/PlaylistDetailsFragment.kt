@@ -37,8 +37,15 @@ class PlaylistDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpObservers()
+        observePlaylistDetails()
+        observePlaylistDetailsLoader()
         getData()
+    }
+
+    private fun observePlaylistDetailsLoader() {
+        viewModel.detailsLoader.observe(viewLifecycleOwner) { loading ->
+            binding.pbDetails.visibility = if (loading) View.VISIBLE else View.GONE
+        }
     }
 
     private fun getData() {
@@ -46,7 +53,7 @@ class PlaylistDetailsFragment : Fragment() {
         viewModel.getPlaylistDetails(playlistId)
     }
 
-    private fun setUpObservers() {
+    private fun observePlaylistDetails() {
         viewModel.playListDetails.observe(viewLifecycleOwner) { result ->
             if (result.isSuccess) {
                 binding.tvPlaylistName.text = result.getOrNull()?.name
