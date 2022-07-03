@@ -13,8 +13,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import petros.efthymiou.groovy.utils.captureValues
-import petros.efthymiou.groovy.utils.getValueForTest
+import com.abir.hasan.androidtdd.utils.captureValues
+import com.abir.hasan.androidtdd.utils.getValueForTest
 
 @ExperimentalCoroutinesApi
 class PlaylistDetailsViewModelShould : BaseUnitTest() {

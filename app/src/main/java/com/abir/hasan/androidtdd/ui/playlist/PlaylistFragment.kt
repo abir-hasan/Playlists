@@ -18,11 +18,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PlaylistFragment : Fragment() {
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = PlaylistFragment()
-    }
-
     private var _binding: FragmentPlaylistBinding? = null
 
     private val binding: FragmentPlaylistBinding

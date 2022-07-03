@@ -8,13 +8,6 @@ class PlaylistViewModel(
     private val repository: PlaylistRepository
 ) : ViewModel() {
 
-    /*private val _playLists = liveData<Result<List<Playlist>>> {
-        emitSource(repository.getPlaylists().asLiveData())
-    }
-
-    val playlists: LiveData<Result<List<Playlist>>>
-        get() = _playLists*/
-
     val playLists: LiveData<Result<List<Playlist>>> = liveData {
         _loader.postValue(true)
         emitSource(repository.getPlaylists()

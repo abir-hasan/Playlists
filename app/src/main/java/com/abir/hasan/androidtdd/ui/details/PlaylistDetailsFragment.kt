@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.abir.hasan.androidtdd.R
 import com.abir.hasan.androidtdd.databinding.FragmentPlaylistDetailBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,7 +61,11 @@ class PlaylistDetailsFragment : Fragment() {
                 binding.tvPlaylistName.text = result.getOrNull()?.name
                 binding.tvPlaylistDetails.text = result.getOrNull()?.details
             } else {
-                //todo
+                Snackbar.make(
+                    binding.root,
+                    R.string.generic_error,
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }
